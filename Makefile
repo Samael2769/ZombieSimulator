@@ -12,6 +12,10 @@ TEST_DIR		=	tests/
 LIB_DIR			=	lib/sm_libc/
 
 SRC_FILES		=	zombiesimulator.cpp			\
+					Frontend.cpp				\
+					Human.cpp					\
+					Zombie.cpp					\
+					Engine.cpp					\
 
 SRC_FILES_MAIN	=	main.cpp			\
 
@@ -29,11 +33,11 @@ NAME			=	zombiesimulator
 
 ##############################################################
 
-CFLAGS			=	-W -Wall -Wextra
+CFLAGS			=	-W -Wall -Wextra 
 
-CPPFLAGS		=	-I./includes
+CPPFLAGS		=	-I./includes 
 
-TEST_LIB		=	--coverage -lcriterion -lgcov
+TEST_LIB		=	--coverage -lcriterion -lgcov 
 
 ##############################################################
 
@@ -52,7 +56,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(OBJ_MAIN)
 	@$(PRNT) -e "\e[0;31m Compiling ${NAME}... \e[0m"
-	$(CC) -o $(NAME) $(OBJ) $(OBJ_MAIN)
+	$(CC) -o $(NAME) $(OBJ) $(OBJ_MAIN) -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 make_lib:
 	@$(PRNT) -e "\e[0;31m Making lib $(LIB_DIR)... \e[0m"

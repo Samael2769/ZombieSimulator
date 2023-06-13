@@ -10,5 +10,5 @@
 
 int main()
 {
-    std::cout << "Hello World" << std::endl;
+    zombiesimulator zombiesimulator;
 }

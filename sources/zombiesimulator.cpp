@@ -9,7 +9,7 @@
 
 zombiesimulator::zombiesimulator()
 {
-
+    _frontend.run();
 }
 
 zombiesimulator::~zombiesimulator()
