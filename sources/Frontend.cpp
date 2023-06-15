@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 2023-06-13 06:48:29
  * @ Modified by: Samael
- * @ Modified time: 2023-06-13 06:54:56
+ * @ Modified time: 2023-06-15 07:07:07
  * @ Description:
  */
 
@@ -11,6 +11,10 @@
 Frontend::Frontend()
 {
     _window.create(sf::VideoMode(800, 600), "Zombie Simulator");
+    IEntity *human = new Human();
+    IEntity *zombie = new Zombie();
+    _engine.addEntity(human);
+    _engine.addEntity(zombie);
 }
 
 Frontend::~Frontend()
@@ -33,6 +37,15 @@ void Frontend::run()
             }
         }
         _window.clear();
+        _engine.update();
+        print();
         _window.display();
+    }
+}
+
+void Frontend::print()
+{
+    for (auto entity : _engine.getEntities()) {
+        entity->draw(_window);
     }
 }

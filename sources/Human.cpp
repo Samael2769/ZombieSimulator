@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 1970-01-01 01:00:00
  * @ Modified by: Samael
- * @ Modified time: 2023-06-13 06:59:35
+ * @ Modified time: 2023-06-15 07:07:25
  * @ Description:
  */
 
@@ -20,5 +20,10 @@ Human::~Human()
 
 void Human::update()
 {
-    _body.move(1, 0);
+    _body.move(2, 0);
+}
+
+void Human::draw(sf::RenderWindow &_window)
+{
+    _window.draw(_body);
 }
