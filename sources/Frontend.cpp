@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 2023-06-13 06:48:29
  * @ Modified by: Samael
- * @ Modified time: 2023-06-16 06:54:13
+ * @ Modified time: 2023-06-19 18:45:22
  * @ Description:
  */
 
@@ -12,10 +12,8 @@
 Frontend::Frontend()
 {
     _window.create(sf::VideoMode(800, 600), "Zombie Simulator");
-    IEntity *human = new Human();
-    IEntity *zombie = new Zombie();
-    _engine.addEntity(human);
-    _engine.addEntity(zombie);
+    _window.setFramerateLimit(60);
+    _engine.initSimulation(100, 20);
 }
 
 Frontend::~Frontend()

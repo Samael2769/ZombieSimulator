@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 2023-06-13 06:47:04
  * @ Modified by: Samael
- * @ Modified time: 2023-06-15 07:04:58
+ * @ Modified time: 2023-06-19 18:30:14
  * @ Description:
  */
 
@@ -18,7 +18,10 @@ class Engine {
         void update();
         std::vector<IEntity*> getEntities();
         void addEntity(IEntity *entity);
+        void initSimulation(int nbEntities, int percentInfected);
     protected:
     private:
         std::vector<IEntity*> _entities;
+        int _nbEntities;
+        int _percentInfected;
 };
