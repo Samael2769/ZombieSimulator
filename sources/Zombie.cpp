@@ -2,25 +2,39 @@
  * @ Author: Samael
  * @ Create Time: 1970-01-01 01:00:00
  * @ Modified by: Samael
- * @ Modified time: 2023-06-19 18:44:11
+ * @ Modified time: 2023-06-20 07:05:17
  * @ Description:
  */
 
 #include "Zombie.hpp"
+#include <iostream>
+#include <cmath>
 
 Zombie::Zombie()
 {
     _body = sf::CircleShape(10);
     _body.setFillColor(sf::Color::Green);
+    _name = "Zombie";
 }
 
 Zombie::~Zombie()
 {
 }
 
-void Zombie::update()
+void Zombie::update(sf::Time deltaTime)
 {
-    _body.move(1, 0);
+    if (_direction.x == 0 && _direction.y == 0)
+        return;
+    sf::Vector2f position = _body.getPosition();
+    sf::Vector2f enemyPos = _direction;
+    sf::Vector2f direction = enemyPos - position;
+    float speed = _speed * deltaTime.asSeconds();
+    float distance = sqrt(pow(direction.x, 2) + pow(direction.y, 2));
+    direction.x = direction.x / distance;
+    direction.y = direction.y / distance;
+    direction.x = direction.x * speed;
+    direction.y = direction.y * speed;
+    _body.move(direction);
 }
 
 void Zombie::draw(sf::RenderWindow &_window)
@@ -31,4 +45,34 @@ void Zombie::draw(sf::RenderWindow &_window)
 void Zombie::setPosition(sf::Vector2f position)
 {
     _body.setPosition(position);
+}
+
+void Zombie::setDirection(sf::Vector2f direction)
+{
+    _direction = direction;
+}
+
+sf::Vector2f Zombie::getPosition()
+{
+    return _body.getPosition();
+}
+
+sf::Vector2f Zombie::getDirection()
+{
+    return _direction;
+}
+
+std::string Zombie::getName()
+{
+    return _name;
+}
+
+void Zombie::setSpeed(float speed)
+{
+    _speed = speed;
+}
+
+float Zombie::getSpeed()
+{
+    return _speed;
 }

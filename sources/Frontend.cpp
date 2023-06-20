@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 2023-06-13 06:48:29
  * @ Modified by: Samael
- * @ Modified time: 2023-06-19 18:45:22
+ * @ Modified time: 2023-06-20 06:32:10
  * @ Description:
  */
 
@@ -13,7 +13,7 @@ Frontend::Frontend()
 {
     _window.create(sf::VideoMode(800, 600), "Zombie Simulator");
     _window.setFramerateLimit(60);
-    _engine.initSimulation(100, 20);
+    _engine.initSimulation(2, 50);
 }
 
 Frontend::~Frontend()
@@ -26,6 +26,9 @@ void Frontend::run()
     texture->loadFromFile("Assets/map.jpg");
     sf::Sprite *sprite = new sf::Sprite();
     sprite->setTexture(*texture);
+    sf::Clock clock;
+    clock.restart();
+    sf::Time time = clock.getElapsedTime();
 
     while (_window.isOpen())
     {
@@ -42,7 +45,9 @@ void Frontend::run()
         }
         _window.clear();
         _window.draw(*sprite);
-        _engine.update();
+        time = clock.getElapsedTime();
+        _engine.update(time);
+        time = clock.restart();
         print();
         _window.display();
     }
