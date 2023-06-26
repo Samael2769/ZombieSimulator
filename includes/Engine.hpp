@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 2023-06-13 06:47:04
  * @ Modified by: Samael
- * @ Modified time: 2023-06-20 06:21:56
+ * @ Modified time: 2023-06-26 07:02:46
  * @ Description:
  */
 
@@ -22,6 +22,9 @@ class Engine {
         void initSimulation(int nbEntities, int percentInfected);
         sf::Vector2f getNearestHuman(sf::Vector2f position);
         sf::Vector2f getNearestZombie(sf::Vector2f position);
+        sf::Vector2f mapSize;
+        void boundariesHandler();
+        void collisionHandler();
     protected:
     private:
         std::vector<IEntity*> _entities;

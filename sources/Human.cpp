@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 1970-01-01 01:00:00
  * @ Modified by: Samael
- * @ Modified time: 2023-06-20 07:05:11
+ * @ Modified time: 2023-06-26 07:26:58
  * @ Description:
  */
 
@@ -15,6 +15,9 @@ Human::Human()
     _body = sf::CircleShape(10);
     _body.setFillColor(sf::Color::Blue);
     _name = "Human";
+    _direction = sf::Vector2f(-1, -1);
+    _Collider = sf::Vector2f(10, 10);
+    _speed = 100;
 }
 
 Human::~Human()
@@ -23,7 +26,7 @@ Human::~Human()
 
 void Human::update(sf::Time deltaTime)
 {
-    if (_direction.x == 0 && _direction.y == 0)
+    if (_direction.x == -1 && _direction.y == -1)
         return;
     sf::Vector2f position = _body.getPosition();
     sf::Vector2f enemyPos = _direction;
@@ -31,8 +34,8 @@ void Human::update(sf::Time deltaTime)
     float speed = _speed * deltaTime.asSeconds();
     float distance = sqrt(pow(direction.x, 2) + pow(direction.y, 2));
     direction.x = direction.x / distance;
-    direction.y = direction.y / distance;
     direction.x = direction.x * speed;
+    direction.y = direction.y / distance;
     direction.y = direction.y * speed;
     _body.move(-direction);
 }
@@ -75,4 +78,9 @@ void Human::setSpeed(float speed)
 float Human::getSpeed()
 {
     return _speed;
+}
+
+sf::Vector2f Human::getCollider()
+{
+    return _Collider;
 }

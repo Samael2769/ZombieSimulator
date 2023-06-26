@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 2023-06-13 06:48:29
  * @ Modified by: Samael
- * @ Modified time: 2023-06-20 06:32:10
+ * @ Modified time: 2023-06-26 07:33:56
  * @ Description:
  */
 
@@ -13,7 +13,7 @@ Frontend::Frontend()
 {
     _window.create(sf::VideoMode(800, 600), "Zombie Simulator");
     _window.setFramerateLimit(60);
-    _engine.initSimulation(2, 50);
+    _engine.initSimulation(200, 1);
 }
 
 Frontend::~Frontend()

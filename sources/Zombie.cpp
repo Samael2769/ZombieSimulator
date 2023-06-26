@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 1970-01-01 01:00:00
  * @ Modified by: Samael
- * @ Modified time: 2023-06-20 07:05:17
+ * @ Modified time: 2023-06-26 07:27:06
  * @ Description:
  */
 
@@ -15,6 +15,9 @@ Zombie::Zombie()
     _body = sf::CircleShape(10);
     _body.setFillColor(sf::Color::Green);
     _name = "Zombie";
+    _direction = sf::Vector2f(-1, -1);
+    _Collider = sf::Vector2f(10, 10);
+    _speed = 50;
 }
 
 Zombie::~Zombie()
@@ -23,7 +26,7 @@ Zombie::~Zombie()
 
 void Zombie::update(sf::Time deltaTime)
 {
-    if (_direction.x == 0 && _direction.y == 0)
+    if (_direction.x == -1 && _direction.y == -1)
         return;
     sf::Vector2f position = _body.getPosition();
     sf::Vector2f enemyPos = _direction;
@@ -75,4 +78,9 @@ void Zombie::setSpeed(float speed)
 float Zombie::getSpeed()
 {
     return _speed;
+}
+
+sf::Vector2f Zombie::getCollider()
+{
+    return _Collider;
 }
