@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 1970-01-01 01:00:00
  * @ Modified by: Samael
- * @ Modified time: 2023-06-26 07:03:56
+ * @ Modified time: 2023-06-27 08:17:42
  * @ Description:
  */
 
@@ -24,6 +24,8 @@ class Human : public IEntity
         void setSpeed(float speed) override;
         float getSpeed() override;
         sf::Vector2f getCollider() override;
+        void setRange(int range) override;
+        int getRange() override;
     private:
         sf::CircleShape _body;
         sf::Vector2f _position;
@@ -32,4 +34,5 @@ class Human : public IEntity
         bool canAttack;
         std::string _name;
         sf::Vector2f _Collider;
+        int range;
 };

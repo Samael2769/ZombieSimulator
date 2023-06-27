@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 1970-01-01 01:00:00
  * @ Modified by: Samael
- * @ Modified time: 2023-06-26 07:03:46
+ * @ Modified time: 2023-06-27 08:17:28
  * @ Description:
  */
 
@@ -29,6 +29,8 @@ class IEntity
         virtual void setSpeed(float speed) = 0;
         virtual float getSpeed() = 0;
         virtual sf::Vector2f getCollider() = 0;
+        virtual void setRange(int range) = 0;
+        virtual int getRange() = 0;
     private:
         sf::CircleShape _body;
         sf::Vector2f _position;
@@ -37,4 +39,5 @@ class IEntity
         bool canAttack;
         std::string _name;
         sf::Vector2f _Collider;
+        int range;
 };

@@ -16,6 +16,7 @@ SRC_FILES		=	zombiesimulator.cpp			\
 					Human.cpp					\
 					Zombie.cpp					\
 					Engine.cpp					\
+					Config.cpp					\
 
 SRC_FILES_MAIN	=	main.cpp			\
 

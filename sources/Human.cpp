@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 1970-01-01 01:00:00
  * @ Modified by: Samael
- * @ Modified time: 2023-06-26 07:26:58
+ * @ Modified time: 2023-06-27 08:18:05
  * @ Description:
  */
 
@@ -18,6 +18,7 @@ Human::Human()
     _direction = sf::Vector2f(-1, -1);
     _Collider = sf::Vector2f(10, 10);
     _speed = 100;
+    range = 150;
 }
 
 Human::~Human()
@@ -37,7 +38,8 @@ void Human::update(sf::Time deltaTime)
     direction.x = direction.x * speed;
     direction.y = direction.y / distance;
     direction.y = direction.y * speed;
-    _body.move(-direction);
+    if (distance <= range)
+        _body.move(-direction);
 }
 
 void Human::draw(sf::RenderWindow &_window)
@@ -83,4 +85,14 @@ float Human::getSpeed()
 sf::Vector2f Human::getCollider()
 {
     return _Collider;
+}
+
+void Human::setRange(int range)
+{
+    this->range = range;
+}
+
+int Human::getRange()
+{
+    return range;
 }

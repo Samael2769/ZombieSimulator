@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 2023-06-13 06:45:36
  * @ Modified by: Samael
- * @ Modified time: 2023-06-16 06:51:56
+ * @ Modified time: 2023-06-27 08:09:13
  * @ Description:
  */
 
@@ -20,5 +20,6 @@ class Frontend
     private:
         sf::RenderWindow _window;
         Engine _engine;
+        Config _config;
 
 };

@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 1970-01-01 01:00:00
  * @ Modified by: Samael
- * @ Modified time: 2023-06-26 07:27:06
+ * @ Modified time: 2023-06-27 08:18:12
  * @ Description:
  */
 
@@ -83,4 +83,14 @@ float Zombie::getSpeed()
 sf::Vector2f Zombie::getCollider()
 {
     return _Collider;
+}
+
+void Zombie::setRange(int range)
+{
+    this->range = range;
+}
+
+int Zombie::getRange()
+{
+    return range;
 }

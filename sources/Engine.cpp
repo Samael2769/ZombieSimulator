@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 2023-06-13 06:51:25
  * @ Modified by: Samael
- * @ Modified time: 2023-06-26 07:33:03
+ * @ Modified time: 2023-06-27 08:58:58
  * @ Description:
  */
 
@@ -13,7 +13,6 @@
 
 Engine::Engine()
 {
-    mapSize = sf::Vector2f(800, 600);
 }
 
 Engine::~Engine()
@@ -87,17 +86,15 @@ void Engine::collisionHandler()
             if (entity != otherEntity) {
                 if (checkCollision(entity->getPosition(), entity->getCollider(), otherEntity->getPosition(), otherEntity->getCollider())) {
                     if (entity->getName() == "Zombie" && otherEntity->getName() == "Human") {
-                        std::cout << "Zombie collision" << std::endl;
                         IEntity *zombie = new Zombie();
                         zombie->setPosition(otherEntity->getPosition());
                         _entities[index] = zombie;
                     } else if (entity->getName() == "Human" && otherEntity->getName() == "Zombie") {
-                        std::cout << "Human collision" << std::endl;
                         IEntity *zombie = new Zombie();
                         zombie->setPosition(entity->getPosition());
+                        zombie->setSpeed(entity->getSpeed());
                         _entities[index] = zombie;
                     } else if (entity->getName() == otherEntity->getName()) {
-                        std::cout << "Collision with same species" << std::endl;
                         // Déplacez otherEntity hors de la zone de collision avec entity
                         sf::Vector2f collisionVector = otherEntity->getPosition() - entity->getPosition();
                         collisionVector = normalize(collisionVector); // Normalisez le vecteur de collision
@@ -126,21 +123,24 @@ void Engine::addEntity(IEntity *entity)
 
 void Engine::initSimulation(int nbEntities, int percentInfected)
 {
+    mapSize = sf::Vector2f(std::stoi(_config->_config["win_size_x"]), std::stoi(_config->_config["win_size_y"]));
     int nbInfected = nbEntities * percentInfected / 100;
-    std::cout << "nbInfect: " << nbInfected << std::endl;
     srand(time(NULL));
 
     for (int i = 0; i < nbEntities; i++) {
         if (i < nbInfected) {
             IEntity *zombie = new Zombie();
+            zombie->setSpeed(std::stoi(_config->_config["zombie_speed"]));
             addEntity(zombie);
         } else {
             IEntity *human = new Human();
+            human->setSpeed(std::stoi(_config->_config["human_speed"]));
+            human->setRange(std::stoi(_config->_config["range"]));
             addEntity(human);
         }
     }
     for (auto &entity : _entities) {
-        entity->setPosition(sf::Vector2f(rand() % 800, rand() % 600));
+        entity->setPosition(sf::Vector2f(rand() % std::stoi(_config->_config["win_size_x"]), rand() % std::stoi(_config->_config["win_size_y"])));
     }
 }
 
@@ -227,3 +227,7 @@ sf::Vector2f Engine::getNearestZombie(sf::Vector2f position)
     return nearestZombie;
 }
 
+void Engine::setConfig(Config *config)
+{
+    _config = config;
+}

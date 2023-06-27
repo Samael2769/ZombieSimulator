@@ -2,18 +2,19 @@
  * @ Author: Samael
  * @ Create Time: 2023-06-13 06:48:29
  * @ Modified by: Samael
- * @ Modified time: 2023-06-26 07:33:56
+ * @ Modified time: 2023-06-27 08:58:06
  * @ Description:
  */
 
 #include "Frontend.hpp"
 #include <iostream>
 
-Frontend::Frontend()
+Frontend::Frontend(): _engine(), _config()
 {
-    _window.create(sf::VideoMode(800, 600), "Zombie Simulator");
+    _window.create(sf::VideoMode(std::stoi(_config._config["win_size_x"]), std::stoi(_config._config["win_size_y"])), "Zombie");
     _window.setFramerateLimit(60);
-    _engine.initSimulation(200, 1);
+    _engine.setConfig(&_config);
+    _engine.initSimulation(std::stoi(_config._config["nb_entities"]), std::stoi(_config._config["percent_infected"]));
 }
 
 Frontend::~Frontend()
@@ -23,7 +24,7 @@ Frontend::~Frontend()
 void Frontend::run()
 {
     sf::Texture *texture = new sf::Texture();
-    texture->loadFromFile("Assets/map.jpg");
+    texture->loadFromFile(_config._config["map"]);
     sf::Sprite *sprite = new sf::Sprite();
     sprite->setTexture(*texture);
     sf::Clock clock;

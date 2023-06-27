@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 2023-06-13 06:47:04
  * @ Modified by: Samael
- * @ Modified time: 2023-06-26 07:02:46
+ * @ Modified time: 2023-06-27 08:09:38
  * @ Description:
  */
 
@@ -11,6 +11,7 @@
 #include "Zombie.hpp"
 #include <vector>
 #include <cmath>
+#include "Config.hpp"
 
 class Engine {
     public:
@@ -25,9 +26,11 @@ class Engine {
         sf::Vector2f mapSize;
         void boundariesHandler();
         void collisionHandler();
+        void setConfig(Config *config);
     protected:
     private:
         std::vector<IEntity*> _entities;
         int _nbEntities;
         int _percentInfected;
+        Config *_config;
 };
