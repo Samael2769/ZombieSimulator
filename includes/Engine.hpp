@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 2023-06-13 06:47:04
  * @ Modified by: Samael
- * @ Modified time: 2023-06-27 08:09:38
+ * @ Modified time: 2023-06-29 06:59:21
  * @ Description:
  */
 
@@ -27,6 +27,7 @@ class Engine {
         void boundariesHandler();
         void collisionHandler();
         void setConfig(Config *config);
+        void deleteDeadEntities();
     protected:
     private:
         std::vector<IEntity*> _entities;

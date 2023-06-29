@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 1970-01-01 01:00:00
  * @ Modified by: Samael
- * @ Modified time: 2023-06-27 08:17:42
+ * @ Modified time: 2023-06-29 07:16:56
  * @ Description:
  */
 
@@ -26,6 +26,8 @@ class Human : public IEntity
         sf::Vector2f getCollider() override;
         void setRange(int range) override;
         int getRange() override;
+        bool getIsAlive() override;
+        void setIsAlive(bool isAlive) override;
     private:
         sf::CircleShape _body;
         sf::Vector2f _position;
@@ -35,4 +37,5 @@ class Human : public IEntity
         std::string _name;
         sf::Vector2f _Collider;
         int range;
+        bool isAlive;
 };

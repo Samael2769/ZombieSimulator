@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 1970-01-01 01:00:00
  * @ Modified by: Samael
- * @ Modified time: 2023-06-27 08:18:12
+ * @ Modified time: 2023-06-29 07:18:48
  * @ Description:
  */
 
@@ -18,6 +18,7 @@ Zombie::Zombie()
     _direction = sf::Vector2f(-1, -1);
     _Collider = sf::Vector2f(10, 10);
     _speed = 50;
+    isAlive = true;
 }
 
 Zombie::~Zombie()
@@ -93,4 +94,14 @@ void Zombie::setRange(int range)
 int Zombie::getRange()
 {
     return range;
+}
+
+void Zombie::setIsAlive(bool alive)
+{
+    isAlive = alive;
+}
+
+bool Zombie::getIsAlive()
+{
+    return isAlive;
 }

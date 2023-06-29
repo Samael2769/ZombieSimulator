@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 1970-01-01 01:00:00
  * @ Modified by: Samael
- * @ Modified time: 2023-06-27 08:18:05
+ * @ Modified time: 2023-06-29 07:18:18
  * @ Description:
  */
 
@@ -19,6 +19,7 @@ Human::Human()
     _Collider = sf::Vector2f(10, 10);
     _speed = 100;
     range = 150;
+    isAlive = true;
 }
 
 Human::~Human()
@@ -95,4 +96,14 @@ void Human::setRange(int range)
 int Human::getRange()
 {
     return range;
+}
+
+void Human::setIsAlive(bool alive)
+{
+    isAlive = alive;
+}
+
+bool Human::getIsAlive()
+{
+    return isAlive;
 }

@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 1970-01-01 01:00:00
  * @ Modified by: Samael
- * @ Modified time: 2023-06-27 08:17:28
+ * @ Modified time: 2023-06-29 07:16:36
  * @ Description:
  */
 
@@ -31,6 +31,8 @@ class IEntity
         virtual sf::Vector2f getCollider() = 0;
         virtual void setRange(int range) = 0;
         virtual int getRange() = 0;
+        virtual bool getIsAlive() = 0;
+        virtual void setIsAlive(bool isAlive) = 0;
     private:
         sf::CircleShape _body;
         sf::Vector2f _position;
@@ -40,4 +42,5 @@ class IEntity
         std::string _name;
         sf::Vector2f _Collider;
         int range;
+        bool isAlive;
 };

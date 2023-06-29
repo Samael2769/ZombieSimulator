@@ -2,7 +2,7 @@
  * @ Author: Samael
  * @ Create Time: 2023-06-13 06:51:25
  * @ Modified by: Samael
- * @ Modified time: 2023-06-27 08:58:58
+ * @ Modified time: 2023-06-29 07:20:29
  * @ Description:
  */
 
@@ -36,6 +36,7 @@ void Engine::update(sf::Time deltaTime)
     }
     collisionHandler();
     boundariesHandler();
+    deleteDeadEntities();
 }
 
 void Engine::boundariesHandler()
@@ -81,19 +82,29 @@ void Engine::collisionHandler()
 {
     const float separationDistance = 20.0f; // Distance de séparation pour éviter les collisions
     int index = 0;
+    int otherIndex = 0;
     for (auto& entity : _entities) {
         for (auto& otherEntity : _entities) {
             if (entity != otherEntity) {
                 if (checkCollision(entity->getPosition(), entity->getCollider(), otherEntity->getPosition(), otherEntity->getCollider())) {
                     if (entity->getName() == "Zombie" && otherEntity->getName() == "Human") {
-                        IEntity *zombie = new Zombie();
-                        zombie->setPosition(otherEntity->getPosition());
-                        _entities[index] = zombie;
+                        int percent = std::stoi(_config->_config["percent_infection"]);
+                        if (rand() % 100 < percent) {
+                            IEntity *zombie = new Zombie();
+                            zombie->setPosition(otherEntity->getPosition());
+                            zombie->setSpeed(otherEntity->getSpeed());
+                            _entities[otherIndex] = zombie;
+                        } else 
+                            _entities[otherIndex]->setIsAlive(false);
                     } else if (entity->getName() == "Human" && otherEntity->getName() == "Zombie") {
-                        IEntity *zombie = new Zombie();
-                        zombie->setPosition(entity->getPosition());
-                        zombie->setSpeed(entity->getSpeed());
-                        _entities[index] = zombie;
+                        int percent = std::stoi(_config->_config["percent_infection"]);
+                        if (rand() % 100 < percent) {
+                            IEntity *zombie = new Zombie();
+                            zombie->setPosition(entity->getPosition());
+                            zombie->setSpeed(entity->getSpeed());
+                            _entities[index] = zombie;
+                        } else
+                            _entities[index]->setIsAlive(false);
                     } else if (entity->getName() == otherEntity->getName()) {
                         // Déplacez otherEntity hors de la zone de collision avec entity
                         sf::Vector2f collisionVector = otherEntity->getPosition() - entity->getPosition();
@@ -106,8 +117,31 @@ void Engine::collisionHandler()
                     }
                 }
             }
+            otherIndex++;
         }
         index++;
+        otherIndex = 0;
+    }
+}
+
+void Engine::deleteDeadEntities()
+{
+    int index = 0;
+    bool deleted = false;
+    while (deleted == false) {
+        std::cout << "Entities size : " << _entities.size() << std::endl;
+        for (auto &entity : _entities) {
+            if (entity->getIsAlive() == false) {
+                std::cout << "Entity " << entity->getName() << " is dead" << std::endl;
+                _entities.erase(_entities.begin() + index);
+                deleted = false;
+                break;
+            }
+            index++;
+        }
+        if (index == _entities.size())
+            deleted = true;
+        index = 0;
     }
 }
 
